@@ -1,0 +1,19 @@
+{
+  "name": "soundlab-server",
+  "version": "1.0.0",
+  "description": "soundlab backend built using Node.js, Express.js and MongoDB Atlas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naszifnaaz/soundlab.git"
+  },
+  "author": "naszifnaaz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/naszifnaaz/soundlab/issues"
+  },
+  "homepage": "https://github.com/naszifnaaz/soundlab#readme"
+}
