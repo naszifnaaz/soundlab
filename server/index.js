@@ -9,6 +9,10 @@ app.use(cors());
 
 // User routes
 const UserController = require("./controllers/user.controller");
-app.use("/users", UserController);
+app.use("/user", UserController);
+
+// Product routes
+const productController = require("./controllers/product.controller");
+app.use("/product", productController);
 
 module.exports = app;
