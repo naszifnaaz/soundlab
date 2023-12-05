@@ -1,11 +1,13 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
 // Creating user schema
 const userSchema = new mongoose.Schema(
   {
     fullname: { type: String, required: true },
-    email: { type: String, required: true, unique: trues },
-    password: {
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true, unique: true },
+    role: {
       type: String,
       enum: ["user", "admin", "super-admin"],
       required: true,
@@ -18,6 +20,18 @@ const userSchema = new mongoose.Schema(
     versionKey: false,
   }
 );
+
+// Hashing password using bcrypt before store
+userSchema.pre("save", function (next) {
+  const hash = bcrypt.hashSync(this.password);
+  this.password = hash;
+  next();
+});
+
+// Checking password with hashed password on login
+userSchema.methods.checkPassword = function (password) {
+  return bcrypt.compareSync(password, this.password);
+};
 
 // Creating user model
 const User = mongoose.model("user", userSchema);
