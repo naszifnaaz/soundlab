@@ -7,4 +7,8 @@ app.use(express.json());
 const cors = require("cors");
 app.use(cors());
 
+// User routes
+const UserController = require("./controllers/user.controller");
+app.use("/users", UserController);
+
 module.exports = app;
