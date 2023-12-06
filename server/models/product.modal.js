@@ -8,7 +8,7 @@ const productSchema = new mongoose.Schema(
     imgs: { type: Array, required: true },
     category: {
       type: String,
-      enum: ["x", "y", "z"],
+      enum: ["Earphones", "Headphones", "Speakers"],
       required: true,
     },
     price: { type: Number, required: true },
