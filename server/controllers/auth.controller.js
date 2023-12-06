@@ -6,8 +6,7 @@ const generateToken = (user) => {
   return jwt.sign({ user }, process.env.JWT_SECRET);
 };
 
-const Register = async (req, res) => {
-  console.log(req.body);
+const register = async (req, res) => {
   try {
     // Check if user is already registered
     let user = await User.findOne({ email: req.body.email });
@@ -29,7 +28,7 @@ const Register = async (req, res) => {
   }
 };
 
-const Login = async (req, res) => {
+const login = async (req, res) => {
   // check if email exist
   let user = await User.findOne({ email: req.body.email });
   if (!user) {
@@ -51,4 +50,4 @@ const Login = async (req, res) => {
   });
 };
 
-module.exports = { Register, Login };
+module.exports = { register, login };
