@@ -4,7 +4,7 @@ import { BsBag } from "react-icons/bs";
 import sound_lab_black from "../../assets/sound-lab-black.svg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-// import CartDrawer from "./CartDrawer";
+import CartDrawer from "./cartDrawer";
 // import { AvatarMenu } from "./AvatarMenu";
 // import { useSelector } from "react-redux";
 import wirelessEarbuds from "../../assets/wireless-earbuds.png";
@@ -127,7 +127,7 @@ export const NavBar = () => {
           </div>
         </div>
       </div>
-      {/* <CartDrawer cartMenu={cartMenu} setCartMenu={setCartMenu} /> */}
+      <CartDrawer cartMenu={cartMenu} setCartMenu={setCartMenu} />
     </>
   );
 };
