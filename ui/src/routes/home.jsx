@@ -13,8 +13,8 @@ export const Home = () => {
       <HeroCarousel />
       <BestSellers />
       <ShopCategories />
-      <DailyDeals />
       <ShopByLifestyle />
+      <DailyDeals />
       <Footer />
     </h1>
   );
