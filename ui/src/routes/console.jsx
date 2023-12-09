@@ -1,3 +1,10 @@
+import { Sidebar } from "../components/admin/Sidebar";
+import { ConsoleHeader } from "../components/admin/consoleHeader";
+
 export const Console = () => {
-  return <h1>Console</h1>;
+  return (
+    <div>
+      <Sidebar />
+    </div>
+  );
 };
