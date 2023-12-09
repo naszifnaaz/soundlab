@@ -4,7 +4,7 @@ import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { userLogin } from "../../features/user/userSlice";
-import { Spinner } from "../commons/Spinner";
+import { Spinner } from "../commons/spinner";
 
 export default function LoginForm() {
   const dispatch = useDispatch();

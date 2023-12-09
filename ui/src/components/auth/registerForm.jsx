@@ -3,7 +3,7 @@ import logo from "../../assets/favicon.svg";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userRegister } from "../../features/user/userSlice";
-import { Spinner } from "../commons/Spinner";
+import { Spinner } from "../commons/spinner";
 
 export default function RegisterForm() {
   const dispatch = useDispatch();
