@@ -1,8 +1,14 @@
 import { useState } from "react";
 import logo from "../../assets/favicon.svg";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { userRegister } from "../../features/user/userSlice";
+import { Spinner } from "../commons/Spinner";
 
 export default function RegisterForm() {
+  const dispatch = useDispatch();
+  const isLoading = useSelector((store) => store.user.loading);
+
   // Register Form Handling
   const initState = {
     fullname: "",
@@ -15,7 +21,8 @@ export default function RegisterForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(formState);
+    dispatch(userRegister(formState));
+    setFormState(initState);
   }
 
   const handleChange = (e) => {
@@ -109,7 +116,7 @@ export default function RegisterForm() {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-orange-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Create Account
+                {isLoading ? <Spinner /> : "Create Account"}
               </button>
             </div>
           </form>

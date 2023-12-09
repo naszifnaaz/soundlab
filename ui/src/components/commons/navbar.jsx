@@ -5,6 +5,8 @@ import sound_lab_black from "../../assets/sound-lab-black.svg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import CartDrawer from "./cartDrawer";
+import { AvatarMenu } from "./avatarMenu";
+import { useSelector } from "react-redux";
 // import { AvatarMenu } from "./AvatarMenu";
 // import { useSelector } from "react-redux";
 import wirelessEarbuds from "../../assets/wireless-earbuds.png";
@@ -19,7 +21,8 @@ import gamingHeadphones from "../../assets/gaming-headphones.png";
 export const NavBar = () => {
   const [mobileNav, setMobileNav] = useState(false);
   const [cartMenu, setCartMenu] = useState(false);
-  const isLoggedIn = false;
+  const isLoggedIn = useSelector((store) => store.user.isLoggedIn);
+
   return (
     <>
       <div>

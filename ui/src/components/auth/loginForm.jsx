@@ -2,8 +2,14 @@ import logo from "../../assets/favicon.svg";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { userLogin } from "../../features/user/userSlice";
+import { Spinner } from "../commons/Spinner";
 
 export default function LoginForm() {
+  const dispatch = useDispatch();
+  const isLoading = useSelector((store) => store.user.loading);
+
   const initState = {
     email: "",
     password: "",
@@ -17,7 +23,8 @@ export default function LoginForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(formState);
+    dispatch(userLogin(formState));
+    setFormState(initState);
   }
 
   return (
@@ -94,7 +101,7 @@ export default function LoginForm() {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-orange-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Sign In
+                {isLoading ? <Spinner /> : "Login"}
               </button>
             </div>
           </form>
