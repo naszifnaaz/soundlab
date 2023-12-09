@@ -32,6 +32,15 @@ export const userLogin = createAsyncThunk("user/login", (user) => {
 const userSlice = createSlice({
   name: "user",
   initialState,
+  reducers: {
+    logout: (state) => {
+      state.isLoggedIn = false;
+      state.user = {};
+      state.token = "";
+      state.role = "";
+      localStorage.removeItem("token");
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(userRegister.pending, (state) => {
       state.loading = true;
@@ -44,6 +53,7 @@ const userSlice = createSlice({
       state.token = action.payload.data.token;
       state.error = "";
       state.isLoggedIn = true;
+      localStorage.setItem("token", action.payload.token);
       toast.success("Account created!");
     });
     builder.addCase(userRegister.rejected, (state, action) => {
@@ -62,6 +72,7 @@ const userSlice = createSlice({
       state.token = action.payload.data.token;
       state.error = "";
       state.isLoggedIn = true;
+      localStorage.setItem("token", JSON.stringify(state.token));
       toast.success("Login Successful!");
     });
     builder.addCase(userLogin.rejected, (state, action) => {
@@ -73,3 +84,4 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
+export const { logout } = userSlice.actions;

@@ -2,7 +2,7 @@ import { FaStar } from "react-icons/fa";
 
 export const DailyDealsCard = ({ product }) => {
   return (
-    <div className="m-2 p-2 flex flex-col flex-wrap justify-center items-center  gap-3 bg-slate-100 rounded-2xl">
+    <div className="m-2 p-2 flex flex-col flex-wrap justify-center items-center  gap-3 bg-slate-100 rounded-2xl relative">
       <div>
         <img
           className=" rounded-xl w-60 hover:grayscale-0 hover:saturate-200 hover:drop-shadow-2xl hover:backdrop-brightness-2xl"

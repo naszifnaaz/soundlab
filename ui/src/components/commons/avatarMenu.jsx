@@ -1,16 +1,24 @@
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../../features/user/userSlice";
+import toast from "react-hot-toast";
 
 export const AvatarMenu = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const role = useSelector((store) => store.user.role);
+  const isAdmin = role === "admin" ? true : false;
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
 
-  function handleLogout() {}
+  function handleLogout() {
+    dispatch(logout());
+    toast.success("User logged out!");
+  }
 
   return (
     <Menu as="div" className="relative ml-3 mr-2">
@@ -19,8 +27,8 @@ export const AvatarMenu = () => {
           <span className="sr-only">Open user menu</span>
           <img
             className="h-10 w-10 rounded-full"
-            src="https://i.pravatar.cc/300"
-            alt=""
+            src="https://api.dicebear.com/7.x/fun-emoji/svg"
+            alt="avatar"
           />
           <span class="top-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
         </Menu.Button>
@@ -39,7 +47,7 @@ export const AvatarMenu = () => {
             <Menu.Item>
               {({ active }) => (
                 <Link
-                  to={"/admin/dashboard"}
+                  to={"/admin/console"}
                   className={classNames(
                     active ? "bg-gray-100" : "",
                     "block px-4 py-2 text-sm text-gray-700"
@@ -52,15 +60,15 @@ export const AvatarMenu = () => {
           ) : null}
           <Menu.Item>
             {({ active }) => (
-              <a
-                href="#"
+              <Link
+                to={"/user/profile"}
                 className={classNames(
                   active ? "bg-gray-100" : "",
                   "block px-4 py-2 text-sm text-gray-700"
                 )}
               >
                 Your Profile
-              </a>
+              </Link>
             )}
           </Menu.Item>
           <Menu.Item>
