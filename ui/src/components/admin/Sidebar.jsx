@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import { AvatarMenu } from "../commons/avatarMenu";
+import { useLocation } from "react-router-dom";
 
 export const Sidebar = () => {
+  const location = useLocation();
+  let arr = location.pathname.split("/");
+  let currentRoute = arr[arr.length - 1];
+
   return (
     <div>
       <div className="flex items- justify-between sm:hidden mt-3">

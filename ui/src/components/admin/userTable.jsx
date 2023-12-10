@@ -1,17 +1,8 @@
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchAllUsers } from "../../features/admin/adminSlice";
 import { FaEdit } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
 import { IoEyeSharp } from "react-icons/io5";
 
-export const UserTable = () => {
-  const dispatch = useDispatch();
-  const users = useSelector((store) => store.admin.users);
-
-  useEffect(() => {
-    dispatch(fetchAllUsers());
-  }, []);
+export const UserTable = ({ users }) => {
   return (
     <div className="p-4 sm:ml-64">
       <div class="relative overflow-x-auto shadow-md sm:rounded-lg">

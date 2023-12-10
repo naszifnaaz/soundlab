@@ -8,13 +8,17 @@ const initialState = {
   orders: [],
   error: "",
   auth: false,
+  totalPages: 1,
+  totalDocuments: 1,
 };
 
 const BASE_URL = "http://localhost:4040/user";
 
 // Generates pending, fulfilled and rejected action types
-export const fetchAllUsers = createAsyncThunk("admin/fetchUsers", () => {
-  return axios.get(`${BASE_URL}/all`).then((res) => res.data);
+export const fetchAllUsers = createAsyncThunk("admin/fetchUsers", (page) => {
+  return axios
+    .get(`${BASE_URL}/all?page=${page}&perPage=25`)
+    .then((res) => res.data);
 });
 
 const adminSlice = createSlice({
@@ -26,6 +30,8 @@ const adminSlice = createSlice({
     });
     builder.addCase(fetchAllUsers.fulfilled, (state, action) => {
       state.users = action.payload.users;
+      state.totalDocuments = action.payload.totalDocuments;
+      state.totalPages = action.payload.totalPages;
       state.loading = false;
       state.error = "";
     });
