@@ -11,6 +11,7 @@ const productSchema = new mongoose.Schema(
       enum: ["Earphones", "Headphones", "Speakers"],
       required: true,
     },
+    subCategory: { type: String },
     price: { type: Number, required: true },
     offer: { type: Number, min: 0, max: 100, default: 0 },
     rating: { type: String, min: 1, max: 5, default: 5 },

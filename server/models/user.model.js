@@ -14,6 +14,8 @@ const userSchema = new mongoose.Schema(
       default: "user",
     },
     verified: { type: Boolean, required: true, default: false },
+    orderHistory: { type: Array, default: [] },
+    cart: { type: Array, default: [] },
   },
   {
     timestamps: true,
