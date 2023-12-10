@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/user.model");
+const { findByIdAndDelete } = require("../models/product.modal");
 
 // Get all users
 router.get("/all", async (req, res) => {
@@ -12,7 +13,7 @@ router.get("/all", async (req, res) => {
     const users = await User.find().skip(skip).limit(perPage).lean().exec();
     let totalDocuments = await User.estimatedDocumentCount();
     let totalPages = Math.ceil(totalDocuments / perPage);
-    return res.status(200).send({ users, totalPages });
+    return res.status(200).send({ users, totalDocuments, totalPages });
   } catch (error) {
     console.log("Something went wrong!");
     return res.status(400).send({ message: error.message });
@@ -24,6 +25,20 @@ router.get("/:id", async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.params.id }).lean().exec();
     return res.status(200).send({
+      user,
+    });
+  } catch (error) {
+    console.log("Something went wrong!");
+    return res.status(400).send({ message: error.message });
+  }
+});
+
+// Deactivate / Delete user
+router.delete("/:id", async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.id);
+    return res.status(200).send({
+      message: `${req.params.id} deactivated`,
       user,
     });
   } catch (error) {

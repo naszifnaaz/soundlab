@@ -1,5 +1,6 @@
 import { NavBar } from "../components/commons/navbar";
 import { Link } from "react-router-dom";
+import { Footer } from "../components/commons/footer";
 
 export const NotFound = () => {
   return (
@@ -35,6 +36,7 @@ export const NotFound = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

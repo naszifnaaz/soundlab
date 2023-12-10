@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const initialState = {
   loading: false,
@@ -21,6 +22,13 @@ export const fetchAllUsers = createAsyncThunk("admin/fetchUsers", (page) => {
     .then((res) => res.data);
 });
 
+export const deactivateUser = createAsyncThunk(
+  "admin/deactivateUser",
+  async (id) => {
+    return axios.delete(`${BASE_URL}/${id}`).then((res) => res.data);
+  }
+);
+
 const adminSlice = createSlice({
   name: "admin",
   initialState,
@@ -39,6 +47,17 @@ const adminSlice = createSlice({
       state.users = [];
       state.loading = true;
       state.error = action.error.message;
+    });
+    builder.addCase(deactivateUser.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(deactivateUser.fulfilled, (state) => {
+      state.loading = false;
+      toast.success("User deactivated!");
+    });
+    builder.addCase(deactivateUser.rejected, (state, action) => {
+      state.loading = false;
+      toast.error(action.payload.error);
     });
   },
 });

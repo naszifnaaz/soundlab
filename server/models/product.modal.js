@@ -5,17 +5,23 @@ const productSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
     desc: { type: String, required: true },
-    imgs: { type: Array, required: true },
+    thumbnail: { type: String, required: true },
+    img: { type: String, required: true },
     category: {
       type: String,
-      enum: ["Earphones", "Headphones", "Speakers"],
+      enum: ["Earphones", "Headphones", "Speakers", "Neckbands"],
       required: true,
     },
-    subCategory: { type: String },
+    lifestyle: {
+      type: String,
+      enum: ["Fitness", "Parties", "Work", "Fun", "Audiophiles"],
+      required: true,
+    },
     price: { type: Number, required: true },
     offer: { type: Number, min: 0, max: 100, default: 0 },
     rating: { type: String, min: 1, max: 5, default: 5 },
-    reviews: { type: Array, default: [] },
+    reviews: { type: Number, default: 21 },
+    stock: { type: Number, default: 20 },
   },
   {
     timestamps: true,
