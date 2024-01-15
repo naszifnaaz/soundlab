@@ -26,7 +26,7 @@ export const fetchAllProducts = createAsyncThunk(
   "admin/fetchProducts",
   (page) => {
     return axios
-      .get(`${BASE_URL}/product/all?page=${page}&perPage=25`)
+      .get(`${BASE_URL}/product/all?page=${page}&perPage=24`)
       .then((res) => res.data);
   }
 );

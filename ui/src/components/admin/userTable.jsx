@@ -93,7 +93,7 @@ export const UserTable = ({ users }) => {
                         }}
                       >
                         <FaTrash className="mr-2" />
-                        Deactivate User
+                        Deactivate
                       </button>
                     </div>
                   </td>
