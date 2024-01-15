@@ -5,8 +5,18 @@ const Product = require("../models/product.modal");
 // Get all products
 router.get("/all", async (req, res) => {
   try {
-    const products = await Product.find().lean().exec();
-    return res.status(200).send({ products });
+    const page = req.query.page || 1;
+    const perPage = req.query.perPage || 25;
+    const skip = (page - 1) * perPage;
+
+    const products = await Product.find()
+      .skip(skip)
+      .limit(perPage)
+      .lean()
+      .exec();
+    let totalDocuments = await Product.estimatedDocumentCount();
+    let totalPages = Math.ceil(totalDocuments / perPage);
+    return res.status(200).send({ products, totalDocuments, totalPages });
   } catch (error) {
     console.log("Something went wrong!");
     return res.status(400).send({ message: error.message });

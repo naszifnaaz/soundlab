@@ -13,14 +13,23 @@ const initialState = {
   totalDocuments: 1,
 };
 
-const BASE_URL = "http://localhost:4040/user";
+const BASE_URL = "http://localhost:4040";
 
 // Generates pending, fulfilled and rejected action types
 export const fetchAllUsers = createAsyncThunk("admin/fetchUsers", (page) => {
   return axios
-    .get(`${BASE_URL}/all?page=${page}&perPage=25`)
+    .get(`${BASE_URL}/user/all?page=${page}&perPage=25`)
     .then((res) => res.data);
 });
+
+export const fetchAllProducts = createAsyncThunk(
+  "admin/fetchProducts",
+  (page) => {
+    return axios
+      .get(`${BASE_URL}/product/all?page=${page}&perPage=25`)
+      .then((res) => res.data);
+  }
+);
 
 export const deactivateUser = createAsyncThunk(
   "admin/deactivateUser",
@@ -58,6 +67,21 @@ const adminSlice = createSlice({
     builder.addCase(deactivateUser.rejected, (state, action) => {
       state.loading = false;
       toast.error(action.payload.error);
+    });
+    builder.addCase(fetchAllProducts.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(fetchAllProducts.fulfilled, (state, action) => {
+      state.products = action.payload.products;
+      state.totalDocuments = action.payload.totalDocuments;
+      state.totalPages = action.payload.totalPages;
+      state.loading = false;
+      state.error = "";
+    });
+    builder.addCase(fetchAllProducts.rejected, (state, action) => {
+      state.products = [];
+      state.loading = true;
+      state.error = action.error.message;
     });
   },
 });
