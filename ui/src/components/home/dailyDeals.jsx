@@ -21,7 +21,7 @@ export const DailyDeals = () => {
 const DailyDealsProducts = [
   {
     rating: "5.0",
-    img: "https://www.boat-lifestyle.com/cdn/shop/products/main-img-1_1_300x.png?v=1615965621",
+    img: "https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Artboard_1__3_-removebg-preview_medium.png?v=1686628064",
     name: "Airdopes Alpha",
     price: "₹999",
     striked_price: "₹2,499",
