@@ -1,16 +1,20 @@
+import { useNavigate } from "react-router-dom";
+
 export const ProductCard = ({ product }) => {
+  const navigate = useNavigate();
   return (
-    <div className="flex p-2 bg-white border rounded-lg shadow-md sm:w-full md:w-[48%] lg:w-[30%]">
-      {/* Left Section - Image */}
+    <div
+      className="flex p-2 bg-white border rounded-lg shadow-md sm:w-full md:w-[48%] lg:w-[30%]"
+      onClick={() => navigate(`/products/${product._id}`)}
+    >
       <div className="w-1/3">
         <img
           src={product.thumbnail}
           alt={product.title}
-          className="w-full h-full object-cover rounded-md"
+          className="w-full h-full object-cover rounded-md min-w-full"
         />
       </div>
 
-      {/* Right Section - Product Details */}
       <div className="w-2/2 px-4">
         <p className="text-sm font-normal mb-1">
           ⭐{product.rating} | {product.reviews} ✅

@@ -8,6 +8,7 @@ import { NotFound } from "./notFound";
 import { UsersConsole } from "./usersConsole";
 import { ProductConsole } from "./productConsole";
 import { Products } from "./products";
+import { ProductDetails } from "./productDetails";
 
 export const MainRoutes = () => {
   return (
@@ -17,6 +18,7 @@ export const MainRoutes = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/user/profile" element={<UserProfile />} />
       <Route path="/products" element={<Products />} />
+      <Route path="/products/:id" element={<ProductDetails />} />
       <Route path="/admin/console" element={<Console />} />
       <Route path="/admin/users" element={<UsersConsole />} />
       <Route path="/admin/products" element={<ProductConsole />} />

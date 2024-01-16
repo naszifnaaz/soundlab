@@ -8,6 +8,7 @@ const initialState = {
   products: [],
   orders: [],
   error: "",
+  selectedProduct: {},
   auth: false,
   totalPages: 1,
   totalDocuments: 1,
@@ -34,7 +35,14 @@ export const fetchAllProducts = createAsyncThunk(
 export const deactivateUser = createAsyncThunk(
   "admin/deactivateUser",
   async (id) => {
-    return axios.delete(`${BASE_URL}/${id}`).then((res) => res.data);
+    return axios.delete(`${BASE_URL}/user/${id}`).then((res) => res.data);
+  }
+);
+
+export const fetchProductById = createAsyncThunk(
+  "admin/fetchProductById",
+  async (id) => {
+    return axios.get(`${BASE_URL}/product/${id}`).then((res) => res.data);
   }
 );
 
@@ -82,6 +90,19 @@ const adminSlice = createSlice({
       state.products = [];
       state.loading = true;
       state.error = action.error.message;
+    });
+    builder.addCase(fetchProductById.pending, (state) => {
+      state.loading = true;
+      state.selectedProduct = {};
+    });
+    builder.addCase(fetchProductById.fulfilled, (state, action) => {
+      state.loading = false;
+      state.selectedProduct = action.payload.product;
+      state.error = "";
+    });
+    builder.addCase(fetchProductById.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload.error;
     });
   },
 });
