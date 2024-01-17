@@ -59,7 +59,7 @@ export const NavBar = () => {
             {NavItems.map((item, index) => {
               return (
                 <Link
-                  to={"/hello"}
+                  to={"/products"}
                   key={index}
                   className="mr-4 text-lg font-light link link-underline link-underline-black text-black"
                 >
