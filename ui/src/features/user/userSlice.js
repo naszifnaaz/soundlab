@@ -40,6 +40,20 @@ const userSlice = createSlice({
       state.role = "";
       localStorage.removeItem("token");
     },
+    addToCart: (state, action) => {
+      state.cart.push(action.payload);
+      toast.success("Added to cart!");
+      localStorage.setItem("cart", JSON.stringify(state.cart));
+    },
+    removeFromCart: (state, action) => {
+      console.log(action.payload);
+      console.log("state", state.cart);
+      state.cart = state.cart.filter((el) => {
+        return el._id != action.payload;
+      });
+      localStorage.setItem("cart", JSON.stringify(state.cart));
+      toast.success("Item removed!");
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(userRegister.pending, (state) => {
@@ -84,4 +98,4 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const { logout } = userSlice.actions;
+export const { logout, addToCart, removeFromCart } = userSlice.actions;

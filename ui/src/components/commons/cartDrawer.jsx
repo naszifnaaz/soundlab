@@ -2,8 +2,11 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import EmptyCart from "../../assets/empty-cart.png";
+import { useSelector } from "react-redux";
+import CartItems from "./cartItems";
 
 export default function CartDrawer({ cartMenu, setCartMenu }) {
+  const cart = useSelector((store) => store.user.cart);
   return (
     <Transition.Root show={cartMenu} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setCartMenu}>
@@ -60,7 +63,11 @@ export default function CartDrawer({ cartMenu, setCartMenu }) {
                     </div>
                     <div className="relative mt-6 flex-1 px-4 sm:px-6 flex justify-center items-center">
                       {/* Your content */}
-                      <img src={EmptyCart} alt="Cart Empty" />
+                      {cart.length == 0 ? (
+                        <img src={EmptyCart} alt="Cart Empty" />
+                      ) : (
+                        <CartItems />
+                      )}
                     </div>
                   </div>
                 </Dialog.Panel>

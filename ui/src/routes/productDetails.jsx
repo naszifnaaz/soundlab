@@ -4,6 +4,7 @@ import { NavBar } from "../components/commons/navbar";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProductById } from "../features/admin/adminSlice";
+import { addToCart } from "../features/user/userSlice";
 
 export const ProductDetails = () => {
   const params = useParams();
@@ -74,6 +75,7 @@ export const ProductDetails = () => {
               <button
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-orange-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                onClick={() => dispatch(addToCart(product))}
               >
                 Add To Cart
               </button>
