@@ -11,7 +11,10 @@ export const ProductDetails = () => {
   const dispatch = useDispatch();
   const product = useSelector((store) => store.admin.selectedProduct);
   const isLoading = useSelector((store) => store.admin.isLoading);
-  console.log(product);
+  let INRFormatter = new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+  });
 
   const colorOptions = ["red", "blue", "green", "yellow", "purple"];
 
@@ -38,9 +41,13 @@ export const ProductDetails = () => {
               </p>
               <p className="text-4xl font-bold mb-2">{product.title}</p>
               <p className="text-xs text-gray-700">{product.desc}</p>
-              <p className="text-2xl my-2">${product.price}</p>
+              <p className="text-2xl my-2">
+                {INRFormatter.format(product.price)}
+              </p>
               <p>
-                <span className="line-through text-gray-600">$2,499</span>
+                <span className="line-through text-gray-600">
+                  {INRFormatter.format(product.price)}
+                </span>
                 <span className="text-green-400 ml-2 font-semibold">
                   {product.offer}% off
                 </span>

@@ -3,6 +3,10 @@ import { removeFromCart } from "../../features/user/userSlice";
 
 export default function CartItems() {
   const dispatch = useDispatch();
+  let INRFormatter = new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+  });
   const cart = useSelector((store) => store.user.cart);
   return (
     <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
@@ -26,7 +30,9 @@ export default function CartItems() {
                         <h3>
                           <a href={product.href}>{product.title}</a>
                         </h3>
-                        <p className="ml-4">{product.price}</p>
+                        <p className="ml-4">
+                          {INRFormatter.format(product.price)}
+                        </p>
                       </div>
                       <p className="mt-1 text-sm text-gray-500">
                         {product.category}

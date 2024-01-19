@@ -5,6 +5,10 @@ import { addToCart } from "../../features/user/userSlice";
 export const ProductCard = ({ product }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  let INRFormatter = new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+  });
   return (
     <div className="flex p-2 bg-white border rounded-lg shadow-md sm:w-full md:w-[48%] lg:w-[30%] min-w-full lg:min-w-0">
       <div className="w-1/3">
@@ -26,10 +30,12 @@ export const ProductCard = ({ product }) => {
         >
           {product.title}
         </p>
-        <div className="flex items-center mb-2">
-          <span className="mr-2 font-bold text-xl">${product.price}</span>
+        <div className="flex items-center mb-2 flex-wrap">
+          <span className="mr-2 font-bold text-xl">
+            {INRFormatter.format(product.price)}
+          </span>
           <span className="mr-2 font-normal line-through text-sm text-gray-500">
-            $2,499
+            {INRFormatter.format(product.price)}
           </span>
           <span className="text-green-600 font-bold">{product.offer}% off</span>
         </div>
