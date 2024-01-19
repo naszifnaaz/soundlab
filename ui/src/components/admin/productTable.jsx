@@ -6,6 +6,10 @@ import { useSelector } from "react-redux";
 
 export const ProductTable = ({ products }) => {
   const isLoading = useSelector((store) => store.admin.loading);
+  let INRFormatter = new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+  });
   return (
     <div className="p-4 sm:ml-64">
       <div className="my-5 flex justify-end">
@@ -60,7 +64,9 @@ export const ProductTable = ({ products }) => {
                   <td class="px-6 py-4">{product.title}</td>
                   <td class="px-6 py-4">{product.category}</td>
                   <td class="px-6 py-4">{product.lifestyle}</td>
-                  <td class="px-6 py-4">{product.price}</td>
+                  <td class="px-6 py-4">
+                    {INRFormatter.format(product.price)}
+                  </td>
                   <td>
                     <button className="mx-2">
                       <FaEdit />
