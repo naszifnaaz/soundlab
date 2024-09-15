@@ -13,6 +13,10 @@ const startServer = async () => {
   }
 };
 
+app.listen(process.env.PORT, () => {
+  console.log(`Server running on port ${process.env.PORT}`);
+});
+
 startServer();
 
 module.exports = app; // Export the app for Vercel's serverless function to handle
