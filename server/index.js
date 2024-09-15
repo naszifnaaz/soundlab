@@ -13,6 +13,10 @@ const {
   validationBodyRules,
 } = require("./middlewares/register.validator");
 
+app.get("/", (req, res) => {
+  return res.send({ message: "Sound Lab Server!" });
+});
+
 // User routes
 const UserController = require("./controllers/user.controller");
 app.use("/user", UserController);

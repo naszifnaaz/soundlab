@@ -137,12 +137,6 @@ export const NavBar = () => {
 
 const NavItems = [
   {
-    text: "Earphones",
-  },
-  {
-    text: "Headphones",
-  },
-  {
-    text: "Speakers",
+    text: "Browse Products",
   },
 ];
